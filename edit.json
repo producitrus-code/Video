@@ -1,0 +1,88 @@
+{
+  "video": "source/EDITAR_NC.mov",
+  "transcript": "source/transcript.json",
+  "output": "output/EDITADO_NC.mp4",
+  "palette": {
+    "brown": "#4E2C22",
+    "terracotta": "#C8665E",
+    "cream": "#F4EFE9",
+    "pill": "#F7F2EC"
+  },
+  "cards": [
+    {
+      "start": 0.0,
+      "end": 2.52,
+      "label": "para noivas",
+      "title": "verdades duras demais pra *escutar*",
+      "hero": true
+    },
+    {
+      "start": 2.52,
+      "end": 6.98,
+      "label": "verdade nº 1",
+      "title": "corte a *lista* de convidados"
+    },
+    {
+      "start": 6.98,
+      "end": 16.6,
+      "label": "verdade nº 2",
+      "title": "padrinho não é *presente caro*"
+    },
+    {
+      "start": 16.86,
+      "end": 26.44,
+      "label": "verdade nº 3",
+      "title": "pode *chover* no seu dia"
+    },
+    {
+      "start": 26.44,
+      "end": 35.26,
+      "label": "verdade nº 4",
+      "title": "ninguém agrada *todo mundo*"
+    },
+    {
+      "start": 35.26,
+      "end": 51.3,
+      "label": "verdade nº 5",
+      "title": "não comece a vida *endividada*"
+    },
+    {
+      "start": 51.3,
+      "end": 56.0,
+      "label": "agora me conta",
+      "title": "qual foi a mais *difícil* de escutar?",
+      "cta": "comenta ↓"
+    }
+  ],
+  "skip_segments_starting": [
+    0.0,
+    51.3
+  ],
+  "corrections": {
+    "38.94": "a dois",
+    "50.42": "têm"
+  },
+  "keywords": [
+    "caro",
+    "padrinhos",
+    "caros",
+    "caríssimos",
+    "cota",
+    "mico",
+    "chova",
+    "b",
+    "confortável",
+    "mal",
+    "agradar",
+    "motivo",
+    "endividada",
+    "finanças",
+    "bolso",
+    "princesa",
+    "castelo",
+    "tchau"
+  ],
+  "skip_words": [
+    "número"
+  ]
+}
