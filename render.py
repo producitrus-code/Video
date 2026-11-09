@@ -230,11 +230,11 @@ def build_chunks(cfg: dict) -> list[Chunk]:
 
 
 class CaptionRenderer:
-    SIZE = 74
+    SIZE = 80
 
     def __init__(self, pal: dict, top_of: callable):
-        self.plain = Style(sans(self.SIZE), pal["brown"], -0.045)
-        self.accent = Style(serif(int(self.SIZE * 1.22)), pal["terracotta"], -0.005)
+        self.plain = Style(sans(self.SIZE), pal["caption"], -0.045)
+        self.accent = Style(serif(int(self.SIZE * 1.22)), pal["caption_accent"], -0.005)
         self.pal = pal
         self.top_of = top_of
 
@@ -253,16 +253,11 @@ class CaptionRenderer:
                 lines[-1].append(i); cur += add
 
         line_h = size * 1.05
-        box_h = int(line_h * len(lines) + 44)
-        box_w = int(max(sum(widths[i] for i in ln) + space * (len(ln) - 1) for ln in lines) + 80)
-        box_x = (W - box_w) // 2
-        box_y = self.top_of(t)
-
+        block_h = int(line_h * len(lines) + 44)
+        top = self.top_of(t)
         appear = ease_out_cubic((t - ch.start) / 0.18)
-        box, pad = _caption_box(box_w, box_h, self.pal["cream"])
-        _blit(frame, box, box_x - pad, box_y - pad + int((1 - appear) * 16), appear)
 
-        txt = Image.new("RGBA", (W, box_h + 60), (0, 0, 0, 0))
+        txt = Image.new("RGBA", (W, block_h + 60), (0, 0, 0, 0))
         d = ImageDraw.Draw(txt)
         y = 22 + size * 0.82
         for ln in lines:
@@ -277,12 +272,19 @@ class CaptionRenderer:
                     draw_tracked(d, (x, y + dy), w.text, st, int(255 * a))
                 x += widths[i] + space
             y += line_h
-        _blit(frame, txt, 0, box_y + int((1 - appear) * 16), appear)
+        _blit(frame, _soft_shadow(txt), 0, top + 4, appear)
+        _blit(frame, txt, 0, top, appear)
 
 
-@lru_cache(maxsize=256)
-def _caption_box(w: int, h: int, color) -> tuple[Image.Image, int]:
-    return rounded_card(w, h, color, 30)
+def _soft_shadow(layer: Image.Image) -> Image.Image:
+    """Dark diffuse shadow from the text alpha — keeps light text legible on busy footage."""
+    alpha = layer.getchannel("A")
+    tight = alpha.filter(ImageFilter.GaussianBlur(2.5)).point(lambda v: int(min(255, v * 0.8)))
+    wide = alpha.filter(ImageFilter.GaussianBlur(18)).point(lambda v: int(min(255, v * 1.1)))
+    a = Image.fromarray(np.maximum(np.array(tight), np.array(wide)))
+    sh = Image.new("RGBA", layer.size, (28, 14, 8, 0))
+    sh.putalpha(a)
+    return sh
 
 
 def _blit(frame: Image.Image, img: Image.Image, x: int, y: int, alpha: float = 1.0):

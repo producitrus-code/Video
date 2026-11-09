@@ -6,7 +6,9 @@
     "brown": "#4E2C22",
     "terracotta": "#C8665E",
     "cream": "#F4EFE9",
-    "pill": "#F7F2EC"
+    "pill": "#F7F2EC",
+    "caption": "#FBF7F2",
+    "caption_accent": "#F2A69C"
   },
   "cards": [
     {
