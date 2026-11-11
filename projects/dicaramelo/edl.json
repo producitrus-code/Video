@@ -1,0 +1,284 @@
+{
+ "start": 11.23,
+ "end": 93.5,
+ "cuts": [
+  {
+   "t": 11.23,
+   "file": "broll/5_ELE_H.mov",
+   "note": "Desde 2019",
+   "src": 0.3
+  },
+  {
+   "t": 13.4,
+   "file": "work_catalog//stills/f-e-v-184.jpg",
+   "note": "doces finos",
+   "y": 0.5
+  },
+  {
+   "t": 15.65,
+   "file": "work_catalog//stills/9X8A5500.jpg",
+   "note": "e bolos",
+   "y": 0.45
+  },
+  {
+   "t": 17.39,
+   "file": "work_catalog//stills/BKL11348.jpg",
+   "note": "500 celebrações",
+   "y": 0.5
+  },
+  {
+   "t": 18.95,
+   "file": "work_catalog//stills/_JAC8925.jpg",
+   "note": "",
+   "y": 0.5
+  },
+  {
+   "t": 20.25,
+   "file": "work_catalog//stills/Casamento_Franciele_e_Alex_(637).jpg",
+   "note": "",
+   "y": 0.75
+  },
+  {
+   "t": 21.29,
+   "file": "work_catalog//stills/grdr_2026-04-18_1608050CE66DE34A39.jpg",
+   "note": "Acreditamos que um doce",
+   "y": 0.5
+  },
+  {
+   "t": 23.0,
+   "file": "work_catalog//stills/IMG-20261019-WA0063.jpg",
+   "note": "além do sabor",
+   "y": 0.5
+  },
+  {
+   "t": 25.17,
+   "file": "broll/DICARAMELO-1.mov",
+   "note": "experiência",
+   "src": 33.5
+  },
+  {
+   "t": 27.39,
+   "file": "work_catalog//stills/erick_pedro_casamento-356.jpg",
+   "note": "decoração",
+   "y": 0.6
+  },
+  {
+   "t": 29.45,
+   "file": "work_catalog//stills/G&G-98.jpg",
+   "note": "memórias",
+   "y": 0.4
+  },
+  {
+   "t": 30.9,
+   "file": "work_catalog//stills/L&L834.jpg",
+   "note": "que ficam",
+   "y": 0.6
+  },
+  {
+   "t": 32.31,
+   "file": "broll/5_ELE_H.mov",
+   "note": "doces finos",
+   "src": 18.5
+  },
+  {
+   "t": 34.25,
+   "file": "work_catalog//stills/20260907135322.jpg",
+   "note": "técnicas de produção",
+   "y": 0.45
+  },
+  {
+   "t": 36.91,
+   "file": "work_catalog//stills/IMG-20260419-WA0042.jpg",
+   "note": "acabamentos",
+   "y": 0.5
+  },
+  {
+   "t": 38.2,
+   "file": "work_catalog//stills/grdr_2026-04-18_16101115FD2A09AA82.jpg",
+   "note": "cuidadosos",
+   "y": 0.6
+  },
+  {
+   "t": 39.35,
+   "file": "work_catalog//stills/Decoração-119.jpg",
+   "note": "ingredientes",
+   "y": 0.4
+  },
+  {
+   "t": 40.4,
+   "file": "work_catalog//stills/Foto_por_@sheephouseweddings-25.jpg",
+   "note": "selecionados",
+   "y": 0.5
+  },
+  {
+   "t": 41.35,
+   "file": "work_catalog//stills/ld-64.jpg",
+   "note": "alta qualidade",
+   "y": 0.5
+  },
+  {
+   "t": 43.07,
+   "file": "work_catalog//stills/Foto_por_@sheephouseweddings-41.jpg",
+   "y": 0.5,
+   "note": "Cada doce"
+  },
+  {
+   "t": 44.89,
+   "file": "work_catalog//stills/f-e-v-176.jpg",
+   "note": "artesanalmente",
+   "y": 0.5
+  },
+  {
+   "t": 46.29,
+   "file": "broll/VID-WA0046.mp4",
+   "note": "encantar",
+   "src": 2.0,
+   "y": 0.6
+  },
+  {
+   "t": 47.11,
+   "file": "work_catalog//stills/IMG-20261019-WA0069.jpg",
+   "note": "não só pelo sabor",
+   "y": 0.5
+  },
+  {
+   "t": 49.15,
+   "file": "work_catalog//stills/L&L231.jpg",
+   "note": "beleza e apresentação",
+   "y": 0.55
+  },
+  {
+   "t": 51.57,
+   "file": "work_catalog//stills/A-e-G-chacara-1052.jpg",
+   "note": "cada mesa",
+   "y": 0.5
+  },
+  {
+   "t": 53.3,
+   "file": "work_catalog//stills/K&S-29.jpg",
+   "note": "forma única",
+   "y": 0.6
+  },
+  {
+   "t": 55.13,
+   "file": "work_catalog//stills/bruna&bruno_prev-54.jpg",
+   "note": "identidade",
+   "y": 0.6
+  },
+  {
+   "t": 56.6,
+   "file": "work_catalog//stills/IMG-20261019-WA0074.jpg",
+   "note": "estilo de cada cliente",
+   "y": 0.5
+  },
+  {
+   "t": 59.09,
+   "file": "broll/DICARAMELO-1.mov",
+   "note": "experiência completa",
+   "src": 14.0
+  },
+  {
+   "t": 61.81,
+   "file": "broll/IMG_5263.MOV",
+   "note": "degustação",
+   "src": 0.2
+  },
+  {
+   "t": 63.67,
+   "file": "broll/IMG_5262.MOV",
+   "note": "",
+   "src": 1.0,
+   "y": 0.45
+  },
+  {
+   "t": 65.03,
+   "file": "broll/IMG_5261.MOV",
+   "note": "escolha dos doces",
+   "src": 0.3
+  },
+  {
+   "t": 66.6,
+   "file": "work_catalog//stills/FOR07212.jpg",
+   "note": "dia do evento",
+   "y": 0.6
+  },
+  {
+   "t": 68.97,
+   "file": "work_catalog//stills/Decoração-17.jpg",
+   "note": "composição da mesa",
+   "y": 0.55
+  },
+  {
+   "t": 71.11,
+   "file": "work_catalog//stills/20260907140249.jpg",
+   "note": "montagem",
+   "y": 0.5
+  },
+  {
+   "t": 72.21,
+   "file": "work_catalog//stills/wd-gp70.jpg",
+   "note": "serviço",
+   "y": 0.5
+  },
+  {
+   "t": 73.69,
+   "file": "work_catalog//stills/3W5A0013.jpg",
+   "note": "cuidado",
+   "y": 0.6
+  },
+  {
+   "t": 75.25,
+   "file": "work_catalog//stills/casamento-isabelatiago---86.jpg",
+   "note": "detalhes",
+   "y": 0.5
+  },
+  {
+   "t": 77.37,
+   "file": "broll/DICARAMELO-1.mov",
+   "note": "entregar doces",
+   "src": 0.8
+  },
+  {
+   "t": 79.69,
+   "file": "work_catalog//stills/L&L22.jpg",
+   "note": "ouvir, entender",
+   "y": 0.35
+  },
+  {
+   "t": 81.75,
+   "file": "broll/DICARAMELO-1.mov",
+   "note": "sonhar junto",
+   "src": 36.0
+  },
+  {
+   "t": 84.05,
+   "file": "work_catalog//stills/DayFlavio_previa_casamento_-_094.jpg",
+   "note": "celebração",
+   "y": 0.6
+  },
+  {
+   "t": 86.19,
+   "file": "work_catalog//stills/foto-0578_(2023-05-15T14_08_59.753).jpg",
+   "note": "",
+   "y": 0.4
+  },
+  {
+   "t": 87.77,
+   "file": "work_catalog//stills/erick_pedro_casamento-787.jpg",
+   "note": "dedicação",
+   "y": 0.5
+  },
+  {
+   "t": 89.83,
+   "file": "work_catalog//stills/img8724.jpg",
+   "note": "impecável",
+   "y": 0.5
+  },
+  {
+   "t": 91.6,
+   "file": "work_catalog//stills/NathaliaGustavo_Casamento_-_BlissFotografia_0783.jpg",
+   "note": "inesquecível",
+   "y": 0.3
+  }
+ ]
+}
