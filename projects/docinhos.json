@@ -1,0 +1,42 @@
+{
+  "video": "source/v2/video.mov",
+  "transcript": "source/v2/transcript.json",
+  "output": "output/EDITADO_DOCINHOS.mp4",
+  "palette": {
+    "brown": "#4E2C22",
+    "terracotta": "#C8665E",
+    "cream": "#F4EFE9",
+    "pill": "#F7F2EC",
+    "caption": "#FBF7F2",
+    "caption_accent": "#F2A69C"
+  },
+  "caption_top": 745,
+  "cards": [],
+  "corrections": {},
+  "keywords": [
+    "docinhos",
+    "delícias",
+    "caramelo",
+    "palestrante",
+    "ouro",
+    "mescla",
+    "simples",
+    "elaborados",
+    "equilibrar",
+    "custo",
+    "deliciosos",
+    "paladares",
+    "pistache",
+    "brigadeiro",
+    "clássico",
+    "erro",
+    "agradar",
+    "cítricos",
+    "adocicados",
+    "suaves",
+    "convidados",
+    "faltar",
+    "trufa"
+  ],
+  "max_chars": 18
+}

@@ -1,7 +1,8 @@
 """Render animated captions + topic cards over the source video.
 
 Usage: python3 render.py [--preview SECONDS ...]
-Config lives in edit.json; word timings in source/transcript.json.
+Usage: python3 render.py [--config edit.json] [--preview SECONDS ...]
+Each project config (JSON) points to its video, transcript, cards and keywords.
 """
 from __future__ import annotations
 
@@ -179,10 +180,10 @@ class Chunk:
 
 def build_chunks(cfg: dict) -> list[Chunk]:
     segs = json.loads((ROOT / cfg["transcript"]).read_text())
-    skip_seg = {round(s, 2) for s in cfg["skip_segments_starting"]}
-    fixes = {round(float(k), 2): v for k, v in cfg["corrections"].items()}
+    skip_seg = {round(s, 2) for s in cfg.get("skip_segments_starting", [])}
+    fixes = {round(float(k), 2): v for k, v in cfg.get("corrections", {}).items()}
     keys = {k.lower() for k in cfg["keywords"]}
-    skip_words = {w.lower() for w in cfg["skip_words"]}
+    skip_words = {w.lower() for w in cfg.get("skip_words", [])}
 
     chunks: list[Chunk] = []
     for seg in segs:
@@ -208,7 +209,7 @@ def build_chunks(cfg: dict) -> list[Chunk]:
         cur = Chunk()
         for word, punct in words:
             chars = sum(len(x.text) + 1 for x in cur.words) + len(word.text)
-            if cur.words and (len(cur.words) >= 4 or chars > 24 or word.key and any(x.key for x in cur.words)):
+            if cur.words and (len(cur.words) >= 4 or chars > cfg.get("max_chars", 24) or word.key and any(x.key for x in cur.words)):
                 chunks.append(cur)
                 cur = Chunk()
             cur.words.append(word)
@@ -306,6 +307,7 @@ class Timeline:
         self.cards = [(c, build_card(c, pal)) for c in cfg["cards"]]
         self.pills = {i: build_pill(c["cta"], pal) for i, (c, _) in enumerate(self.cards) if c.get("cta")}
         self.chunks = build_chunks(cfg)
+        self.caption_top = cfg.get("caption_top", CARD_TOP)
         self.captions = CaptionRenderer(pal, self._caption_top)
 
     def _active_card(self, t: float):
@@ -317,7 +319,7 @@ class Timeline:
     def _caption_top(self, t: float) -> int:
         act = self._active_card(t)
         if not act:
-            return CARD_TOP
+            return self.caption_top
         layer = act[2]
         return layer.y + layer.img.height - 40 + 28
 
@@ -347,13 +349,14 @@ class Timeline:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--preview", type=float, nargs="*", help="render still frames at these times")
+    ap.add_argument("--config", default="edit.json", help="project config, relative to repo root")
     args = ap.parse_args()
-    cfg = json.loads((ROOT / "edit.json").read_text())
+    cfg = json.loads((ROOT / args.config).read_text())
     tl = Timeline(cfg)
     src = ROOT / cfg["video"]
 
     if args.preview:
-        out = ROOT / "output/preview"
+        out = ROOT / "output/preview" / Path(args.config).stem
         out.mkdir(parents=True, exist_ok=True)
         for t in args.preview:
             bg = subprocess.run(["ffmpeg", "-v", "error", "-ss", str(t), "-i", str(src), "-frames:v", "1",
