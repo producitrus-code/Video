@@ -1,0 +1,36 @@
+{
+  "video": "source/v3/video.mov",
+  "transcript": "source/v3/transcript.json",
+  "output": "output/EDITADO_STOP_THE_WEDDING.mp4",
+  "palette": {
+    "brown": "#4E2C22",
+    "terracotta": "#C8665E",
+    "cream": "#F4EFE9",
+    "pill": "#F7F2EC",
+    "caption": "#FBF7F2",
+    "caption_accent": "#F2A69C"
+  },
+  "caption_top": 560,
+  "max_chars": 18,
+  "cards": [
+    { "start": 0.0,   "end": 5.87,  "label": "a trend do momento", "title": "#stopthewedding: *parem* o casamento?", "hero": true },
+    { "start": 17.37, "end": 33.23, "label": "quem começou",       "title": "a cantora *ashe* e a música stop the wedding" },
+    { "start": 39.23, "end": 51.0,  "label": "interpretação nº 1", "title": "*red flags* no relacionamento" },
+    { "start": 51.01, "end": 64.3,  "label": "interpretação nº 2", "title": "o que deu *errado* no casamento" },
+    { "start": 64.43, "end": 72.0,  "label": "interpretação nº 3", "title": "rir do que *aconteceu*" },
+    { "start": 82.77, "end": 100.8, "label": "o recado",           "title": "tudo bem não sair *100% perfeito*" },
+    { "start": 106.69,"end": 111.4, "label": "me conta",           "title": "qual o seu maior *medo?*", "cta": "me segue →" }
+  ],
+  "photos": [
+    { "start": 18.9, "end": 26.0, "path": "source/v3/ashe_print.jpg", "crop": [150, 1060, 850, 1760],
+      "width": 400, "x": 590, "y": 820, "tilt": -4, "caption": "ashe", "credit": "instagram / reprodução" }
+  ],
+  "skip_segments_starting": [0.05],
+  "corrections": { "18.97": "ashe", "34.91": "tração" },
+  "keywords": [
+    "hashtag", "viralizando", "parem", "calma", "força", "ashe", "música", "reflexão",
+    "passado", "frustrações", "interpretações", "séria", "flags", "alerta", "errado",
+    "fornecedores", "humor", "sarro", "engraçado", "planejou", "graves", "perfeito",
+    "preparada", "equipes", "importantes", "educação", "personalidade", "amor", "medos", "segue"
+  ]
+}

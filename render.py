@@ -162,6 +162,27 @@ def build_pill(text: str, pal: dict) -> Layer:
     return Layer(im, W - MARGIN_X - w - pad, 1430 - pad)
 
 
+def build_photo(spec: dict, pal: dict) -> Layer:
+    """Polaroid-style photo card: cream frame, cropped photo, serif caption + credit, slight tilt."""
+    src = Image.open(ROOT / spec["path"]).convert("RGB")
+    if spec.get("crop"):
+        src = src.crop(tuple(spec["crop"]))
+    pw = spec.get("width", 420)
+    photo = src.resize((pw, int(pw * src.height / src.width)), Image.LANCZOS)
+    border, cap_h = 22, 112
+    w, h = pw + 2 * border, photo.height + border + cap_h
+    card, pad = rounded_card(w, h, pal["cream"], 18)
+    card.paste(photo, (pad + border, pad + border))
+    d = ImageDraw.Draw(card)
+    name = Style(serif(52), pal["brown"], -0.01)
+    credit = Style(sans(20, 600), pal["brown"], 0.02)
+    base = pad + border + photo.height
+    draw_tracked(d, (pad + border, base + 56), spec.get("caption", ""), name)
+    draw_tracked(d, (pad + border, base + 92), spec.get("credit", "").upper(), credit, 170)
+    card = card.rotate(spec.get("tilt", -3), resample=Image.BICUBIC, expand=True)
+    return Layer(card, spec["x"], spec["y"])
+
+
 # ---------- captions ----------
 @dataclass
 class Word:
@@ -204,7 +225,7 @@ def build_chunks(cfg: dict) -> list[Chunk]:
             parts = text.split()
             for j, part in enumerate(parts):
                 last = j == len(parts) - 1
-                words.append((Word(part, w["s"], w["e"], clean.lower() in keys), last and raw[-1] in ",.!?"))
+                words.append((Word(part, w["s"], w["e"], clean.lower() in keys or part.lower() in keys), last and raw[-1] in ",.!?"))
 
         cur = Chunk()
         for word, punct in words:
@@ -306,6 +327,7 @@ class Timeline:
         pal = {k: hex_rgb(v) for k, v in cfg["palette"].items()}
         self.cards = [(c, build_card(c, pal)) for c in cfg["cards"]]
         self.pills = {i: build_pill(c["cta"], pal) for i, (c, _) in enumerate(self.cards) if c.get("cta")}
+        self.photos = [(p, build_photo(p, pal)) for p in cfg.get("photos", [])]
         self.chunks = build_chunks(cfg)
         self.caption_top = cfg.get("caption_top", CARD_TOP)
         self.captions = CaptionRenderer(pal, self._caption_top)
@@ -339,6 +361,12 @@ class Timeline:
                 pp = ease_out_back((t - c["start"] - 0.6) / 0.4)
                 if pp > 0:
                     _blit(fr, pill.img, pill.x, pill.y + int((1 - pp) * 30), min(1.0, max(pp, 0)))
+        for spec, layer in self.photos:
+            if spec["start"] <= t < spec["end"]:
+                p_in = ease_out_back((t - spec["start"]) / 0.45, 1.2)
+                p_out = ease_out_cubic((spec["end"] - t) / 0.25)
+                a = min(max(min(p_in, 1.0), 0.0), p_out)
+                _blit(fr, layer.img, layer.x, layer.y + int((1 - p_in) * 90), a)
         for ch in self.chunks:
             if ch.start - 0.02 <= t < ch.end:
                 self.captions.render(fr, ch, t)
