@@ -16,7 +16,7 @@ from PIL import Image
 
 from render import H, ROOT, W, build_card, hex_rgb
 
-GRID_SAFE_BOTTOM = 1635
+GRID_SAFE_TOP, GRID_SAFE_BOTTOM = 285, 1635
 
 
 def grab_frame(video: Path, t: float) -> Image.Image:
@@ -25,13 +25,16 @@ def grab_frame(video: Path, t: float) -> Image.Image:
     return Image.frombytes("RGBA", (W, H), raw)
 
 
-def build_cover(cfg: dict, t: float, label: str, title: str) -> Image.Image:
+def build_cover(cfg: dict, t: float, label: str, title: str, position: str = "bottom") -> Image.Image:
     """Frame + brand title card (cream, brown heavy sans, terracotta serif accent) at the grid-safe bottom."""
     pal = {k: hex_rgb(v) for k, v in cfg["palette"].items()}
     img = grab_frame(ROOT / cfg["video"], t)
     card = build_card({"label": label, "title": title, "hero": True}, pal)
     shadow_pad = 40
-    y = GRID_SAFE_BOTTOM - 40 - (card.img.height - shadow_pad)
+    if position == "top":
+        y = GRID_SAFE_TOP + 40 - shadow_pad
+    else:
+        y = GRID_SAFE_BOTTOM - 40 - (card.img.height - shadow_pad)
     img.alpha_composite(card.img, (card.x, y))
     return img.convert("RGB")
 
@@ -43,11 +46,12 @@ def main():
     ap.add_argument("--label", required=True)
     ap.add_argument("--title", required=True, help="wrap accent words in *asterisks*")
     ap.add_argument("--out", required=True)
+    ap.add_argument("--position", choices=["top", "bottom"], default="bottom")
     a = ap.parse_args()
     cfg = json.loads((ROOT / a.config).read_text())
     out = ROOT / a.out
     out.parent.mkdir(parents=True, exist_ok=True)
-    build_cover(cfg, a.time, a.label, a.title).save(out, quality=95)
+    build_cover(cfg, a.time, a.label, a.title, a.position).save(out, quality=95)
     print(out)
 
 
