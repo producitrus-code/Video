@@ -50,7 +50,7 @@ def photo_card(path: Path, width: int, radius: int = 34) -> Image.Image:
     return card
 
 
-def build(photo: Path, title: str, subtitle: str) -> Image.Image:
+def build(photo: Path, title: str, subtitle: str, photo_width: int | None = None) -> Image.Image:
     img = gradient_bg()
     d = ImageDraw.Draw(img)
     lines = [l.strip() for l in title.split("|")]
@@ -69,8 +69,9 @@ def build(photo: Path, title: str, subtitle: str) -> Image.Image:
     y += sub.font.size * 1.15
     draw_tracked(d, (MARGIN_X, y), subtitle, sub)
 
-    card = photo_card(photo, W - 2 * MARGIN_X)
-    img.alpha_composite(card, (MARGIN_X - 50, int(y + sub.font.size * 0.55) - 50))
+    pw = photo_width or W - 2 * MARGIN_X
+    card = photo_card(photo, pw)
+    img.alpha_composite(card, ((W - pw) // 2 - 50, int(y + sub.font.size * 0.9) - 50))
     return img.convert("RGB")
 
 
@@ -80,10 +81,11 @@ def main():
     ap.add_argument("--title", required=True, help="use | to break lines")
     ap.add_argument("--subtitle", required=True)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--photo-width", type=int, help="card width in px; keep small for low-res photos (default: full width)")
     a = ap.parse_args()
     out = ROOT / a.out
     out.parent.mkdir(parents=True, exist_ok=True)
-    build(ROOT / a.photo, a.title, a.subtitle).save(out, quality=95)
+    build(ROOT / a.photo, a.title, a.subtitle, a.photo_width).save(out, quality=95)
     print(out)
 
 
