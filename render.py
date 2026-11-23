@@ -135,15 +135,21 @@ def build_card(card: dict, pal: dict) -> Layer:
     lines = wrap(tokenize_rich(card["title"], plain, accent), inner_w, size * 0.22)
     line_h = size * 0.98
     pad_x, pad_top, pad_bot = 52, 46, 56
-    label_h = label.font.size * 1.15
+    has_label = bool(card.get("label"))
+    label_h = label.font.size * 1.15 if has_label else 0
+    if not has_label:
+        pad_top -= int(size * 0.1)
     h = int(pad_top + label_h + line_h * len(lines) + pad_bot - size * 0.12)
     w = W - 2 * MARGIN_X
 
     im, pad = rounded_card(w, h, pal["cream"], 38)
     d = ImageDraw.Draw(im)
-    base_y = pad + pad_top + label.font.size * 0.8
-    draw_tracked(d, (pad + pad_x, base_y), card["label"], label)
-    y = base_y + label_h * 0.35 + line_h
+    if has_label:
+        base_y = pad + pad_top + label.font.size * 0.8
+        draw_tracked(d, (pad + pad_x, base_y), card["label"], label)
+        y = base_y + label_h * 0.35 + line_h
+    else:
+        y = pad + pad_top + size * 0.78
     for line in lines:
         x = pad + pad_x
         for tk in line:
