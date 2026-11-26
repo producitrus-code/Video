@@ -3,3 +3,5 @@ work/*
 !work/transcribe.py
 source/**/*.mov
 output/
+source/**/*.cut.mp4
+source/acervo/
