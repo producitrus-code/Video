@@ -381,6 +381,7 @@ class Timeline:
         self.broll_caption_top = cfg.get("broll_caption_top", 1500)
         self.chunks = build_chunks(cfg)
         self.caption_top = cfg.get("caption_top", CARD_TOP)
+        self.caption_fixed = cfg.get("caption_fixed", False)  # True: captions never move to follow cards
         self.captions = CaptionRenderer(pal, self._caption_top)
 
     def _active_card(self, t: float):
@@ -390,6 +391,8 @@ class Timeline:
         return None
 
     def _caption_top(self, t: float) -> int:
+        if self.caption_fixed:
+            return self.caption_top
         if any(b.spec["start"] <= t < b.spec["end"] for b in self.brolls):
             return self.broll_caption_top
         act = self._active_card(t)

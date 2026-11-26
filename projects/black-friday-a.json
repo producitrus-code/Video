@@ -10,71 +10,15 @@
     "caption": "#FBF7F2",
     "caption_accent": "#F2A69C"
   },
-  "caption_top": 560,
+  "caption_top": 1290,
   "max_chars": 18,
   "cards": [
     {
       "start": 0.0,
-      "end": 7.16,
+      "end": 4.62,
       "label": "black friday",
       "title": "noiva não quer chinelo, quer *desconto*",
       "hero": true
-    },
-    {
-      "start": 7.16,
-      "end": 14.7,
-      "label": "conectar eventos",
-      "title": "os melhores *fornecedores* de curitiba e região"
-    },
-    {
-      "start": 14.7,
-      "end": 19.98,
-      "label": "tudo num só lugar",
-      "title": "decoração, foto, buffet, *DJ* e mais"
-    },
-    {
-      "start": 19.98,
-      "end": 23.52,
-      "label": "e o melhor",
-      "title": "preços *justos* que cabem no bolso"
-    },
-    {
-      "start": 23.52,
-      "end": 29.7,
-      "label": "black friday",
-      "title": "descontos até o *fim do mês*",
-      "hero": true
-    },
-    {
-      "start": 29.7,
-      "end": 31.52,
-      "label": "e o melhor",
-      "title": "a conectar é *gratuita*"
-    },
-    {
-      "start": 31.52,
-      "end": 39.28,
-      "label": "como funciona",
-      "title": "cadastre-se e vá na aba *promoções*"
-    },
-    {
-      "start": 39.28,
-      "end": 42.26,
-      "label": "aba promoções",
-      "title": "ofertas *imperdíveis*"
-    },
-    {
-      "start": 42.26,
-      "end": 47.48,
-      "label": "não espera",
-      "title": "realize seu sonho com *confiança*"
-    },
-    {
-      "start": 47.48,
-      "end": 49.21,
-      "label": "conectar eventos",
-      "title": "a gente se vê *lá!*",
-      "cta": "acesse a conectar →"
     }
   ],
   "brolls": [],
@@ -102,5 +46,6 @@
     "sonho",
     "confiança",
     "tchau"
-  ]
+  ],
+  "caption_fixed": true
 }
