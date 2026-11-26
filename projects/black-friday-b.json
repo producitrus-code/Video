@@ -1,0 +1,111 @@
+{
+  "video": "source/v4/b.cut.mp4",
+  "transcript": "source/v4/b.transcript.json",
+  "output": "output/BLACK_FRIDAY_B.mp4",
+  "palette": {
+    "brown": "#4E2C22",
+    "terracotta": "#C8665E",
+    "cream": "#F4EFE9",
+    "pill": "#F7F2EC",
+    "caption": "#FBF7F2",
+    "caption_accent": "#F2A69C"
+  },
+  "caption_top": 560,
+  "max_chars": 18,
+  "cards": [
+    {
+      "start": 0.0,
+      "end": 4.0,
+      "label": "vai casar em 2027?",
+      "title": "para tudo e me escuta por *3 segundos*",
+      "hero": true
+    },
+    {
+      "start": 4.0,
+      "end": 10.36,
+      "label": "a conta do casamento",
+      "title": "passa de *R$ 50 mil*"
+    },
+    {
+      "start": 10.36,
+      "end": 14.38,
+      "label": "essa semana",
+      "title": "tem *black friday* na conectar",
+      "hero": true
+    },
+    {
+      "start": 14.38,
+      "end": 20.74,
+      "label": "na conectar eventos",
+      "title": "promoções *imperdíveis* dos fornecedores"
+    },
+    {
+      "start": 20.74,
+      "end": 23.92,
+      "label": "desconto real",
+      "title": "fechando *direto no whatsapp*"
+    },
+    {
+      "start": 23.92,
+      "end": 31.74,
+      "label": "como funciona",
+      "title": "entre, conheça e vá na aba *promoções*"
+    },
+    {
+      "start": 31.74,
+      "end": 40.06,
+      "label": "sem enrolação",
+      "title": "desconto *de verdade*"
+    },
+    {
+      "start": 40.06,
+      "end": 44.66,
+      "label": "e o melhor",
+      "title": "fornecedores *verificados* pela curadoria"
+    },
+    {
+      "start": 44.66,
+      "end": 50.8,
+      "label": "é de graça",
+      "title": "clica no link e *cadastre-se*"
+    },
+    {
+      "start": 50.8,
+      "end": 54.81,
+      "label": "conectar eventos",
+      "title": "um casamento que cabe no seu *bolso*",
+      "cta": "clica no link →"
+    }
+  ],
+  "brolls": [],
+  "corrections": {
+    "34.4": "brinde"
+  },
+  "keywords": [
+    "2027",
+    "segundos",
+    "decoração",
+    "foto",
+    "dj",
+    "cerimonialista",
+    "50",
+    "mil",
+    "black",
+    "friday",
+    "única",
+    "conectar",
+    "promoções",
+    "imperdíveis",
+    "reais",
+    "whatsapp",
+    "plataforma",
+    "fornecedores",
+    "brinde",
+    "verdade",
+    "verificados",
+    "curadoria",
+    "link",
+    "graça",
+    "bolso"
+  ]
+}

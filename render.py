@@ -189,6 +189,49 @@ def build_photo(spec: dict, pal: dict) -> Layer:
     return Layer(card, spec["x"], spec["y"])
 
 
+class Broll:
+    """Full-frame still cutaway with a slow Ken Burns push-in.
+
+    mode=cover: fills the frame (crop around focus). mode=fit: whole image on a blurred, darkened copy of itself
+    (for designed pieces like feed ads that must not be cropped).
+    """
+    PUSH = 0.10
+
+    def __init__(self, spec: dict):
+        self.spec = spec
+        src = Image.open(ROOT / spec["path"]).convert("RGB")
+        bw, bh = round(W * (1 + self.PUSH)), round(H * (1 + self.PUSH))
+        fx, fy = spec.get("focus", [0.5, 0.5])
+        if spec.get("mode", "cover") == "cover":
+            self.base = _cover(src, bw, bh, fx, fy)
+        else:
+            bg = _cover(src, bw, bh, 0.5, 0.5).filter(ImageFilter.GaussianBlur(40))
+            bg = Image.eval(bg, lambda v: int(v * 0.55))
+            fit = src.copy()
+            fit.thumbnail((bw - 2 * 90, bh - 820), Image.LANCZOS)
+            bg.paste(fit, ((bw - fit.width) // 2, round((bh - fit.height) * spec.get("fit_y", 0.32))))
+            self.base = bg
+        self.fx, self.fy = fx if spec.get("mode", "cover") == "cover" else 0.5, fy if spec.get("mode", "cover") == "cover" else 0.5
+
+    def frame(self, t: float) -> Image.Image:
+        s = self.spec
+        p = min(max((t - s["start"]) / max(s["end"] - s["start"], 0.01), 0.0), 1.0)
+        z = 1 + self.PUSH * p
+        bw, bh = self.base.size
+        cw, ch = bw / z, bh / z
+        x0 = (bw - cw) * self.fx
+        y0 = (bh - ch) * self.fy
+        return self.base.resize((W, H), Image.BILINEAR, box=(x0, y0, x0 + cw, y0 + ch)).convert("RGBA")
+
+
+def _cover(src: Image.Image, w: int, h: int, fx: float, fy: float) -> Image.Image:
+    scale = max(w / src.width, h / src.height)
+    im = src.resize((round(src.width * scale), round(src.height * scale)), Image.LANCZOS)
+    x0 = round((im.width - w) * fx)
+    y0 = round((im.height - h) * fy)
+    return im.crop((x0, y0, x0 + w, y0 + h))
+
+
 # ---------- captions ----------
 @dataclass
 class Word:
@@ -334,6 +377,8 @@ class Timeline:
         self.cards = [(c, build_card(c, pal)) for c in cfg["cards"]]
         self.pills = {i: build_pill(c["cta"], pal) for i, (c, _) in enumerate(self.cards) if c.get("cta")}
         self.photos = [(p, build_photo(p, pal)) for p in cfg.get("photos", [])]
+        self.brolls = [Broll(b) for b in cfg.get("brolls", [])]
+        self.broll_caption_top = cfg.get("broll_caption_top", 1500)
         self.chunks = build_chunks(cfg)
         self.caption_top = cfg.get("caption_top", CARD_TOP)
         self.captions = CaptionRenderer(pal, self._caption_top)
@@ -345,6 +390,8 @@ class Timeline:
         return None
 
     def _caption_top(self, t: float) -> int:
+        if any(b.spec["start"] <= t < b.spec["end"] for b in self.brolls):
+            return self.broll_caption_top
         act = self._active_card(t)
         if not act:
             return self.caption_top
@@ -353,7 +400,13 @@ class Timeline:
 
     def frame(self, t: float) -> Image.Image:
         fr = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        for b in self.brolls:
+            if b.spec["start"] <= t < b.spec["end"]:
+                fr = b.frame(t)
+                break
         act = self._active_card(t)
+        if act and any(b.spec["start"] <= t < b.spec["end"] for b in self.brolls):
+            act = None  # cutaways stay unobstructed (faces in photos, text in ads)
         if act:
             i, c, layer = act
             p_in = ease_out_cubic((t - c["start"]) / self.IN)
